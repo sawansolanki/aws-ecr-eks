@@ -47,6 +47,6 @@ jobs:
       uses: aws-actions/aws-cloudformation-github-deploy@v1
 #       working-directory : ${{env.ROOT_PATH}}
       with:
-        name: MyStack
-        template: ${{env.ROOT_PATH}}/amazon-eks-vpc-private-subnets.yaml
+        name: MyStack-k8s
+        template: ${{env.ROOT_PATH}}/cluster.yaml
         
