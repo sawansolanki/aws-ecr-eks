@@ -43,10 +43,26 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         
     #to run cloudformation stack
-    - name: Deploy to AWS CloudFormation
-      uses: aws-actions/aws-cloudformation-github-deploy@v1
-#       working-directory : ${{env.ROOT_PATH}}
+#     - name: Deploy to AWS CloudFormation
+#       uses: aws-actions/aws-cloudformation-github-deploy@v1
+#       with:
+#         name: MyStack-k8s
+#         template: ${{env.ROOT_PATH}}/cluster.yaml
+
+    - name: deploy to cluster
+      uses: kodermax/kubectl-aws-eks@master
+      env:
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA_STAGING }}
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: dockerimage-to-eks
+        IMAGE_TAG: latest
       with:
-        name: MyStack-k8s
-        template: ${{env.ROOT_PATH}}/cluster.yaml
+        args: set image deployment/$ECR_REPOSITORY $ECR_REPOSITORY=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        
+    - name: verify deployment
+      uses: kodermax/kubectl-aws-eks@master
+      env:
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+      with:
+        args: rollout status deployment/dockerimage-to-eks
         
