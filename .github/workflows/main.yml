@@ -45,8 +45,8 @@ jobs:
     #to run cloudformation stack
     - name: Deploy to AWS CloudFormation
       uses: aws-actions/aws-cloudformation-github-deploy@v1
-      working-directory : ${{env.ROOT_PATH}}
+#       working-directory : ${{env.ROOT_PATH}}
       with:
         name: MyStack
-        template: amazon-eks-vpc-private-subnets.yaml
+        template: ${{env.ROOT_PATH}}/amazon-eks-vpc-private-subnets.yaml
         
