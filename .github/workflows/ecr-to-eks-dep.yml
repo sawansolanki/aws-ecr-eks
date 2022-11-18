@@ -9,9 +9,10 @@ on:
       - master
 
 env: 
-  AWS_REGION: eu-west-3
-  ECR_REPOSITORY: kubernetes-github-actions
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY: dockerimage-to-eks
   SHORT_SHA: $(echo ${{ github.sha }} | cut -c 1-8)
+  ROOT_PATH: '${{github.workspace}}/AWS-ECR-to-EKS-Integration'
 
 jobs:
   build:
@@ -37,14 +38,10 @@ jobs:
       id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      working-directory : ${{env.ROOT_PATH}}
       run: |
-        cd site
-        docker image build \
-        --tag ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:latest \
-        --tag ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ env.SHORT_SHA }} \
-        .
-        docker push ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:latest
-        docker push ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ env.SHORT_SHA }}
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         
         
     - name: Install and configure kubectl
@@ -66,5 +63,7 @@ jobs:
         export ECR_REPOSITORY=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}
         export IMAGE_TAG=${{ env.SHORT_SHA }}
         export KUBECONFIG=kubeconfig.yaml
-        envsubst < k8s/kustomization.tmpl.yaml > k8s/kustomization.yaml
-        kubectl kustomize k8s | kubectl apply -f -
+        #envsubst < k8s/kustomization.tmpl.yaml > k8s/kustomization.yaml
+        #kubectl kustomize k8s | kubectl apply -f -
+        kubectl apply -f ${{env.ROOT_PATH}}/deployment.yaml
+        
