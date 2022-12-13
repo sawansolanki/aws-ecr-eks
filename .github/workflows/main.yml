@@ -39,11 +39,11 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         
         
-    - name: Deploy to AWS CloudFormation
-      uses: aws-actions/aws-cloudformation-github-deploy@v1
-      with:
-        name: MyStack-sa1-VPC
-        template: ${{env.ROOT_PATH}}/amazon-eks-vpc-private-subnets.yaml
+#     - name: Deploy to AWS CloudFormation
+#       uses: aws-actions/aws-cloudformation-github-deploy@v1
+#       with:
+#         name: MyStack-sa1-VPC
+#         template: ${{env.ROOT_PATH}}/amazon-eks-vpc-private-subnets.yaml
 # vpc is already crated and then 'vpc-ecr-setup' job failed, hence commented
   
   eks-setup:
