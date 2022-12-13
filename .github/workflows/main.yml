@@ -1,9 +1,7 @@
 name: Deploy to ECR
 
 on:
- 
-  push:
-    branches: [ main ]
+ workflow_dispatch:
     
 env:
     ROOT_PATH: '${{github.workspace}}/AWS-ECR-to-EKS-Integration'
