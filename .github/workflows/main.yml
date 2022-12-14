@@ -66,10 +66,19 @@ jobs:
 
    
    - name: Deploy to AWS EKS cluster
-     uses: aws-actions/aws-cloudformation-github-deploy@v1
-     with:
-       name: MyStack-k8s-sa1
-       template: ${{env.ROOT_PATH}}/amazon-eks-vpc-private-subnets.yaml
+     run: |
+         #install eksctl
+         sudo apt-get update
+         curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+         sudo mv /tmp/eksctl /usr/local/bin
+         eksctl create cluster -f ${{env.ROOT_PATH}}/cluster.yaml
+         
+   - name: Deploy to Kubernetes cluster                                                                            
+     uses: kodermax/kubectl-aws-eks@master                                                                         
+     env:                                                                                                          
+      RELEASE_IMAGE: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.RELEASE_REVISION }}
+     with:                                                                                                         
+      args: set image deployment/$ECR_REPOSITORY $ECR_REPOSITORY=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG  
   
 #     - name: deploy to cluster
 #       uses: kodermax/kubectl-aws-eks@master
