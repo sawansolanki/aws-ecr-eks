@@ -1,4 +1,4 @@
-name:variable-runtime
+name: variable-runtime
 on:
   workflow_dispatch:
 jobs:
