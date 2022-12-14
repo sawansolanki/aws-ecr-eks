@@ -1,7 +1,6 @@
+name:variable-runtime
 on:
   workflow_dispatch:
-    
-
 jobs:
   Echo-On-PR:
     runs-on: ubuntu-latest
