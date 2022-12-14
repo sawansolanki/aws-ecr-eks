@@ -1,4 +1,4 @@
-name: ecr_repo_create
+name: ecr repo create
 
 on:
   workflow_dispatch:
