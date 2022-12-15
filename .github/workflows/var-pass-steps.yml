@@ -1,0 +1,26 @@
+name: ecr shell create
+
+on:
+  workflow_dispatch:
+  
+  push:
+    branches: 
+      feature
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clone
+      uses: actions/checkout@v2
+      
+    - name: repo-shell
+      run: |
+        export REPO_NAME=my-sa1-ecr-repo
+        echo "from same step" $REPO_NAME
+        
+    - name: repo-shell-2
+      run: |
+        echo "from repo-shell step - " $REPO_NAME
+        
