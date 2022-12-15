@@ -10,6 +10,7 @@ on:
 env: 
   ROOT_PATH: '${{github.workspace}}/AWS-ECR-to-EKS-Integration'
   REPO_NAME: 'my-sa1-ecr-repo'
+  ECR_REPOSITORY: my-sa1-ecr-repo
 
 jobs:
   build:
@@ -42,7 +43,6 @@ jobs:
       id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: my-sa1-ecr-repo
       working-directory : ${{env.ROOT_PATH}}
       run: |
         echo "ecr name - " $ECR_REGISTRY
