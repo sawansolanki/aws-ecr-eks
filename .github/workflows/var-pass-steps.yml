@@ -19,6 +19,7 @@ jobs:
       run: |
         export REPO_NAME=my-sa1-ecr-repo
         echo "from same step" $REPO_NAME
+        echo "::set-env name=REPO_NAME::$REPO_NAME"
         
     - name: repo-shell-2
       run: |
