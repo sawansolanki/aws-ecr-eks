@@ -1,7 +1,11 @@
 name: ecr shell create
 
 on:
+  workflow_dispatch:
+  
   push:
+    branches: 
+      main
 
 env: 
   ROOT_PATH: '${{github.workspace}}/AWS-ECR-to-EKS-Integration'
@@ -39,5 +43,7 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       working-directory : ${{env.ROOT_PATH}}
       run: |
+        echo $ECR_REGISTRY
+        echo $
         docker build -t $ECR_REGISTRY/${{REPO_NAME}}:$IMAGE_TAG .
         docker push $ECR_REGISTRY/${{REPO_NAME}}:$IMAGE_TAG
