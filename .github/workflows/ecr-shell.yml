@@ -1,7 +1,7 @@
 name: ecr shell create
 
 on:
-  workflow_dispatch:
+  push:
 
 env: 
   ROOT_PATH: '${{github.workspace}}/AWS-ECR-to-EKS-Integration'
