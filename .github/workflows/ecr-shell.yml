@@ -9,6 +9,7 @@ on:
 
 env: 
   ROOT_PATH: '${{github.workspace}}/AWS-ECR-to-EKS-Integration'
+  REPO_NAME: 'my-sa1-ecr-repo'
 
 jobs:
   build:
@@ -45,5 +46,5 @@ jobs:
       run: |
         echo "ecr name - " $ECR_REGISTRY
         echo "repo name - " $REPO_NAME
-        docker build -t $ECR_REGISTRY/$REPO_NAME:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$REPO_NAME:$IMAGE_TAG
+        docker build -t $ECR_REGISTRY/${{env.REPO_NAME}}:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/${{env.REPO_NAME}}:$IMAGE_TAG
