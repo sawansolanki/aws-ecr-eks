@@ -47,5 +47,5 @@ jobs:
         echo "ecr name - " $ECR_REGISTRY
         echo "repo name - " $REPO_NAME
         echo "ecr-repo - " $ECR_REGISTRY/$REPO_NAME 
-        docker build -t $ECR_REGISTRY/$ECR_REPO:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$ECR_REPO:$IMAGE_TAG
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
