@@ -33,5 +33,5 @@ jobs:
     - name: Use the value
       id: step_two
       run: |
-       echo "${{ env.action_state }}"
+       echo "variable from previuse step - ${{ env.action_state }}"
         
