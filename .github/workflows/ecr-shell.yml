@@ -44,6 +44,6 @@ jobs:
       working-directory : ${{env.ROOT_PATH}}
       run: |
         echo $ECR_REGISTRY
-        echo $
-        docker build -t $ECR_REGISTRY/${{REPO_NAME}}:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/${{REPO_NAME}}:$IMAGE_TAG
+        echo $REPO_NAME
+        docker build -t $ECR_REGISTRY/$REPO_NAME:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/$REPO_NAME:$IMAGE_TAG
