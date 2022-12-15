@@ -19,9 +19,19 @@ jobs:
       run: |
         export REPO_NAME=my-sa1-ecr-repo
         echo "from same step" $REPO_NAME
-        echo "::set-env name=REPO_NAME::$REPO_NAME"
+        #echo "::set-env name=REPO_NAME::$REPO_NAME"
         
     - name: repo-shell-2
       run: |
         echo "from repo-shell step - " $REPO_NAME
+        
+    - name: Set the value
+      id: step_one
+      run: |
+       echo "action_state=yellow" >> $GITHUB_ENV
+      
+    - name: Use the value
+      id: step_two
+      run: |
+       echo "${{ env.action_state }}"
         
