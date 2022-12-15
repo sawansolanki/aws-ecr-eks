@@ -22,7 +22,8 @@ jobs:
         aws-region: ${{ secrets.AWS_REGION }}
       
     - run: |
-        EXPORT REPO_NAME=my-sa1-ecr-repo
+        export REPO_NAME=my-sa1-ecr-repo
+        sudo apt-get install less
         chmod 755 ecr-create.sh
         ./ecr-create.sh
         
