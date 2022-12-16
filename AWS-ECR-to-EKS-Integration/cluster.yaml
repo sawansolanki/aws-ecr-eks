@@ -16,7 +16,7 @@ vpc:
     private:
       MyStack-sa1-EcrEks-PrivateSubnet01:
         id: subnet-00f93bc9cf83e1a91
-      MyStack-sa1-EcrEks-PrivateSubnet01:
+      MyStack-sa1-EcrEks-PrivateSubnet02:
         id: subnet-03681334e6731271a
 
 nodeGroups:
