@@ -57,7 +57,7 @@ jobs:
     - name: Deploy to AWS CloudFormation
       uses: aws-actions/aws-cloudformation-github-deploy@v1
       with:
-       name: MyStack-sa1-VPC
+       name: MyStack-sa1-EcrEks
        template: ${{env.ROOT_PATH}}/amazon-eks-vpc-private-subnets.yaml
        
   eks-setup:
