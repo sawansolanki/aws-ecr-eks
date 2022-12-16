@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 export EKS_CLUSTER_NAME=my-sa1-eks-cluster
 output=$(aws eks describe-cluster --name ${EKS_CLUSTER_NAME} 2>&1)
