@@ -10,3 +10,4 @@ if [ $? -ne 0 ]; then
     >&2 echo "Error is -->" ${output}
   fi
 fi
+#>&2 means send the output to STDERR, So it will print the message as an error on the console.
